@@ -1,0 +1,18 @@
+l=[int(i) for i in input("Enter the array: ").split()]
+n=int(input("Enter the Number: "))
+i=0
+j=0
+m=0
+a=[]
+while i<len(l):
+    m+=l[j]
+    a.append(l[j])
+    j+=1
+    if j==len(l) or m>=n or l[j-1]>l[j]:
+        if n==m:
+            print(a)
+            break
+        a.clear()
+        m=0
+        i+=1
+        j=i
