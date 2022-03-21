@@ -1,0 +1,38 @@
+from datetime import datetime
+import time
+import os
+
+def delete():
+    today = datetime.today()
+    d2 = today.strftime("%B")
+    file1 = open("%s.txt"%d2,"r")
+    lines = file1.readlines()
+    file1.close()
+    l=(int)(len(lines)/2)
+    for i in range(0,l):
+        del lines[0]
+    new_file = open("%s.txt"%d2,"w+")
+    for line in lines:
+        new_file.write(line)
+    new_file.close()
+
+def addTime():
+    today = datetime.today()
+    d2 = today.strftime("%B")
+    file1 = open("%s.txt"%d2,"w+")
+    try:
+        while True:
+            d3=today.strftime("%B")
+            if d2!=d3:
+                file1.close()
+                addTime()
+            if os.path.getsize('%s.txt'%d2)>=500000:
+                delete()
+            now = datetime.now()
+            current_time = now.strftime("%H:%M:%S \n")
+            file1.write(current_time)
+            time.sleep(10)
+    except KeyboardInterrupt:
+        file1.close()
+
+addTime()
